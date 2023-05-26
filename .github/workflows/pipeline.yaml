@@ -17,11 +17,11 @@ jobs:
       - name: install depends
         run: composer install
 
-      - name: generated keys
-        run: php artisan key:generate
-
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: generated keys
+        run: php artisan key:generate
 
       - name: run laravel tests
         run: php artisan test
