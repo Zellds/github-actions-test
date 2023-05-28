@@ -12,8 +12,16 @@ jobs:
         with:
           php-version: 8.1
 
-      - name: ls -la && install depends
+      - uses: actions/checkout@v3
+
+      - name: install depends
         run: composer install
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: generated keys
+        run: php artisan key:generate
 
       - name: run laravel tests
         run: php artisan test
